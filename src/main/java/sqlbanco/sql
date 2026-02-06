@@ -1,0 +1,35 @@
+CREATE DATABASE curso-jsp
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'pt_BR.utf8'
+    LC_CTYPE = 'pt_BR.utf8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+CREATE TABLE public.model_login(
+	login character varying(200) COLLATE pg_catalog."default" NOT NULL,
+	senha character varying(200) COLLATE pg_catalog."default" NOT NULL,
+	id integer NOT NULL default nextval('model_login_id_seq'::regclass),
+	nome character varying(300) COLLATE pg_catalog."default" NOT NULL,
+	email character varying(300) COLLATE pg_catalog."default" NOT NULL,
+	useradmin boolean DEFAULT false,
+	perfil character varying(100) COLLATE pg_catalog."default",
+	sexo character varying(20) COLLATE pg_catalog."default",
+	fotouser character varying(300) COLLATE pg_catalog."default",
+	CONSTRAINT model_login_pkey PRIMARY KEY (id),
+	CONSTRAINT login_unique UNIQUE (login)
+)
+
+WITH(
+	OIDS=FALSE
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.model_login
+    OWNER to postgres;
+    
+INSERT INTO public.model_login(
+	login, senha)
+	VALUES ('postgres', '1830');
